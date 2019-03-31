@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" session="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div>Newest tweets:</div>
+<c:forEach items="${tweets}" var="tweet">
+	<div><c:out value="${tweet}"></c:out></div>
+</c:forEach>

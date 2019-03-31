@@ -16,6 +16,7 @@
     <%@ include file="/WEB-INF/views/jspf/main_menu.jspf"%>
 
     <div>You are at home. :)</div>
+    <%@ include file="/WEB-INF/views/jspf/tweet/newest_tweets.jspf"%>
 
     <%@ include file="/WEB-INF/views/jspf/footer.jspf"%>
 </body>
