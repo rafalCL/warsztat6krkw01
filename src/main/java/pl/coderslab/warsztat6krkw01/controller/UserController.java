@@ -68,7 +68,7 @@ public class UserController {
             return "user/login";
         }
 
-        s.setAttribute("user", user);
+        s.setAttribute("loggedInUser", user);
 
         return "redirect:/";
     }
