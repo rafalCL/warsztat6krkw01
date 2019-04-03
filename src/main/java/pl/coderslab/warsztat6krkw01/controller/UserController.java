@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.warsztat6krkw01.entity.User;
 import pl.coderslab.warsztat6krkw01.model.UserDto;
 import pl.coderslab.warsztat6krkw01.repository.UserRepository;
@@ -33,9 +31,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerPost(@Valid UserDto user, BindingResult br, Model m){
+    public String registerPost(@Valid @ModelAttribute("user") UserDto user, BindingResult br){
+        if(user.getPassword() != null &&
+                !user.getPassword().trim().equals("") &&
+                !user.getPassword().equals(user.getRepeatPassword())) {
+            br.rejectValue("repeatPassword", "PasswordsDoNotMatch", "Passwords must match");
+        }
         if(br.hasErrors()) {
-            m.addAttribute("user", user);
             return "user/register";
         }
 
